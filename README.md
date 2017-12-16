@@ -10,7 +10,7 @@ The code come from an Ellie example (https://ellie-app.com/4DDZ2QrT3a1/0) that I
 
 ## Demos
 
-* [Demo](https://lucamug.github.io/elm-style-elements-examples/)
+* [Demo](https://lucamug.github.io/elm-history-wrapper/)
 
 ## Development
 
