@@ -182,6 +182,7 @@ type alias Element =
     }
 
 
+elementDecoder : Decoder Element
 elementDecoder =
     Decode.map2 Element
         (Decode.field "key" Decode.string)
