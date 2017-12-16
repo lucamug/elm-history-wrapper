@@ -189,9 +189,32 @@ elementDecoder =
         (Decode.field "value" Decode.int)
 
 
+
+-- https://www.brianthicks.com/post/2016/06/17/how-does-json-decode-andthen-work/
+
+
+decodeMsgOriginal : Decoder Msg
+decodeMsgOriginal =
+    Decode.string
+        |> Decode.andThen
+            (\msgString ->
+                case msgString of
+                    "increment" ->
+                        Decode.succeed Increment
+
+                    "decrement" ->
+                        Decode.succeed Decrement
+
+                    "reset" ->
+                        Decode.succeed Reset
+
+                    _ ->
+                        Decode.fail "unknown msg type"
+            )
+
+
 decodeMsg : Decoder Msg
 decodeMsg =
-    -- Decode.list elementDecoder
     Decode.succeed Increment
 
 

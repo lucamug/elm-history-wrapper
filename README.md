@@ -14,4 +14,5 @@ The code come from an Ellie example (https://ellie-app.com/4DDZ2QrT3a1/0) that I
 
 ## Development
 
+* elm-live src/Step00.elm --output=compiled/Step00.js --open --debug
 * elm-live src/Main.elm --output=compiled/Main.js --open --debug
