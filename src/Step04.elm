@@ -1,6 +1,3 @@
--- This the version published at https://ellie-app.com/gmVw6rs97a1/1
-
-
 module Main exposing (main)
 
 import Html exposing (Html, text)
@@ -13,53 +10,37 @@ import Time
 
 
 type alias Model =
-    { counter : Int
-    , error : String
+    { error : String
     }
 
 
 type Msg
-    = Increment
-    | Decrement
-    | Reset
-    | OnTime Time.Time
+    = MessageWithCommand
+    | MessageWithoutCommand
+    | Command Time.Time
     | None
 
 
 init : ( Model, Cmd msg )
 init =
-    { counter = 0, error = "" } ! []
+    { error = "" } ! []
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case Debug.log "msg" msg of
-        Increment ->
-            ( { model
-                | counter = model.counter + 1
-                , error = "OnTime not called yet"
-              }
-            , Task.perform OnTime Time.now
+        MessageWithCommand ->
+            ( { model | error = "Command not called yet" }
+            , Task.perform Command Time.now
             )
 
-        Decrement ->
-            ( { model
-                | counter = model.counter - 1
-                , error = "OnTime not called yet"
-              }
-            , Task.perform OnTime Time.now
+        MessageWithoutCommand ->
+            ( { model | error = "Command not called yet" }
+            , Cmd.none
             )
 
-        Reset ->
-            ( { model
-                | counter = 0
-                , error = "OnTime not called yet"
-              }
-            , Task.perform OnTime Time.now
-            )
-
-        OnTime time ->
-            -- OnTime called, cancelling "OnTime not called yet"
+        Command time ->
+            -- Command called, cancelling "Command not called yet"
             ( { model | error = "" }
             , Cmd.none
             )
@@ -71,31 +52,31 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.div []
-        [ Html.button [ Events.onClick Decrement ] [ Html.text "-" ]
-        , Html.text <| toString model.counter
-        , Html.button [ Events.onClick Increment ] [ Html.text "+" ]
-        , Html.button [ Events.onClick Reset ] [ Html.text "reset" ]
-        , Html.div [ Attr.style [ ( "color", "red" ) ] ] [ text model.error ]
+        [ Html.button [ Events.onClick MessageWithCommand ]
+            [ Html.text "Message With Command" ]
+        , Html.button [ Events.onClick MessageWithoutCommand ]
+            [ Html.text "Message Without Command" ]
+        , Html.button [ Events.onClick (Command 0) ]
+            [ Html.text "Command" ]
+        , Html.div [ Attr.style [ ( "color", "red" ) ] ]
+            [ Html.text model.error ]
         ]
 
 
 encodeMsg : Msg -> Value
 encodeMsg msg =
     case msg of
-        Increment ->
-            Encode.string "increment"
+        MessageWithCommand ->
+            Encode.string "MessageWithCommand"
 
-        Decrement ->
-            Encode.string "decrement"
+        MessageWithoutCommand ->
+            Encode.string "MessageWithoutCommand"
 
-        Reset ->
-            Encode.string "reset"
-
-        OnTime time ->
-            Encode.string "onTime"
+        Command time ->
+            Encode.string "Command"
 
         None ->
-            Encode.string "none"
+            Encode.string "None"
 
 
 decodeMsg : Decoder Msg
@@ -104,19 +85,16 @@ decodeMsg =
         |> Decode.andThen
             (\msgString ->
                 case msgString of
-                    "increment" ->
-                        Decode.succeed Increment
+                    "MessageWithoutCommand" ->
+                        Decode.succeed MessageWithoutCommand
 
-                    "decrement" ->
-                        Decode.succeed Decrement
+                    "MessageWithCommand" ->
+                        Decode.succeed MessageWithCommand
 
-                    "reset" ->
-                        Decode.succeed Reset
-
-                    "onTime" ->
+                    "Command" ->
                         Decode.succeed None
 
-                    "none" ->
+                    "None" ->
                         Decode.succeed None
 
                     _ ->
@@ -127,9 +105,6 @@ decodeMsg =
 main : QAProgram Never Model Msg
 main =
     qaProgram
-        { encode = encodeMsg
-        , decode = decodeMsg
-        }
         { init = init
         , update = update
         , view = view
@@ -141,32 +116,23 @@ main =
 ---
 
 
-type alias Codec msg =
-    { encode : msg -> Encode.Value
-    , decode : Decoder msg
-    }
-
-
 type alias WrappedModel model msg =
     { wrapped : model
     , initial : model
     , messages : List msg
-    , codec : Codec msg
     , input : String
     }
 
 
 wrapperInit :
-    Codec msg
-    -> ( model, Cmd msg )
+    ( model, Cmd msg )
     -> ( WrappedModel model msg, Cmd (WrappedMsg msg) )
-wrapperInit codec ( model, msgs ) =
+wrapperInit ( model, msgs ) =
     ( { wrapped = model
       , initial = model
       , messages = []
-      , codec = codec
       , input = """[
-  "increment"
+  "MessageWithCommand"
 ]"""
       }
     , Cmd.map Wrapped msgs
@@ -180,12 +146,12 @@ type WrappedMsg msg
 
 
 wrapperUpdate :
-    (msg -> model -> ( model, Cmd msg ))
-    -> WrappedMsg msg
-    -> WrappedModel model msg
-    -> ( WrappedModel model msg, Cmd (WrappedMsg msg) )
+    (Msg -> model -> ( model, Cmd msg ))
+    -> WrappedMsg Msg
+    -> WrappedModel model Msg
+    -> ( WrappedModel model Msg, Cmd (WrappedMsg msg) )
 wrapperUpdate wrappedUpdate msg model =
-    case msg of
+    case Debug.log "\nwrapperMsg" msg of
         Wrapped wrappedMsg ->
             let
                 ( wrapped, msgs ) =
@@ -199,7 +165,7 @@ wrapperUpdate wrappedUpdate msg model =
             ( { model | input = input }, Cmd.none )
 
         Replay ->
-            case Decode.decodeString (Decode.list model.codec.decode) model.input of
+            case Decode.decodeString (Decode.list decodeMsg) model.input of
                 Ok msgs ->
                     ( { model
                         | wrapped = List.foldl (\msg model -> wrappedUpdate msg model |> Tuple.first) model.initial msgs
@@ -212,32 +178,33 @@ wrapperUpdate wrappedUpdate msg model =
                     ( { model | input = toString err }, Cmd.none )
 
 
+encodeMessages : List Msg -> String
+encodeMessages messages =
+    messages
+        |> List.reverse
+        |> List.map encodeMsg
+        |> Encode.list
+        |> Encode.encode 2
+
+
 wrapperView :
     (model -> Html msg)
-    -> Codec msg
-    -> WrappedModel model msg
+    -> WrappedModel model Msg
     -> Html (WrappedMsg msg)
-wrapperView wrappedView codec model =
-    let
-        messages : String
-        messages =
-            model.messages
-                |> List.reverse
-                |> List.map codec.encode
-                |> Encode.list
-                |> Encode.encode 2
-    in
+wrapperView wrappedView model =
     Html.div []
         [ wrappedView model.wrapped |> Html.map Wrapped
-        , Html.hr [] []
-        , Html.pre [] [ Html.text messages ]
+        , Html.textarea
+            [ Attr.style [ ( "width", "400px" ), ( "height", "200px" ) ]
+            , Attr.value (encodeMessages model.messages)
+            ]
+            []
         , Html.textarea
             [ Attr.style [ ( "width", "400px" ), ( "height", "200px" ) ]
             , Attr.value model.input
             , Events.onInput Update
             ]
             []
-        , Html.br [] []
         , Html.button [ Events.onClick Replay ] [ Html.text "replay" ]
         ]
 
@@ -247,19 +214,18 @@ type alias QAProgram flags model msg =
 
 
 qaProgram :
-    Codec msg
-    ->
-        { init : ( model, Cmd msg )
-        , update : msg -> model -> ( model, Cmd msg )
-        , view : model -> Html msg
-        , subscriptions : model -> Sub msg
-        }
-    -> QAProgram Never model msg
-qaProgram codec config =
+    { a
+        | init : ( model, Cmd Msg )
+        , subscriptions : model -> Sub Msg
+        , update : Msg -> model -> ( model, Cmd Msg )
+        , view : model -> Html Msg
+    }
+    -> Program Never (WrappedModel model Msg) (WrappedMsg Msg)
+qaProgram config =
     Html.program
-        { init = wrapperInit codec config.init
+        { init = wrapperInit config.init
         , update = wrapperUpdate config.update
-        , view = wrapperView config.view codec
+        , view = wrapperView config.view
         , subscriptions =
             .wrapped >> config.subscriptions >> Sub.map Wrapped
         }
