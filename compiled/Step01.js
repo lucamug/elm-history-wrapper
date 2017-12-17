@@ -12638,6 +12638,39 @@ var _lucamug$elm_history_wrapper$Main$subscriptions = function (model) {
 var _lucamug$elm_history_wrapper$Main$encodeMsg = function (msg) {
 	var _p0 = msg;
 	switch (_p0.ctor) {
+		case 'Increment':
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'msg',
+						_1: _elm_lang$core$Json_Encode$string('Increment')
+					},
+					_1: {ctor: '[]'}
+				});
+		case 'Decrement':
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'msg',
+						_1: _elm_lang$core$Json_Encode$string('Decrement')
+					},
+					_1: {ctor: '[]'}
+				});
+		case 'Reset':
+			return _elm_lang$core$Json_Encode$object(
+				{
+					ctor: '::',
+					_0: {
+						ctor: '_Tuple2',
+						_0: 'msg',
+						_1: _elm_lang$core$Json_Encode$string('Reset')
+					},
+					_1: {ctor: '[]'}
+				});
 		case 'OnScroll':
 			return _elm_lang$core$Json_Encode$object(
 				{
@@ -12797,20 +12830,20 @@ var _lucamug$elm_history_wrapper$Main$sectionStyle = _elm_lang$html$Html_Attribu
 			}
 		}
 	});
-var _lucamug$elm_history_wrapper$Main$containerId = 'div5964';
+var _lucamug$elm_history_wrapper$Main$containerId = 'ciao693';
 var _lucamug$elm_history_wrapper$Main$init = {
 	ctor: '_Tuple2',
-	_0: {position: 0, error: ''},
+	_0: {position: 0, counter: 0, error: ''},
 	_1: _elm_lang$core$Platform_Cmd$none
 };
-var _lucamug$elm_history_wrapper$Main$portScrollTo = _elm_lang$core$Native_Platform.outgoingPort(
-	'portScrollTo',
+var _lucamug$elm_history_wrapper$Main$scrollTo2321 = _elm_lang$core$Native_Platform.outgoingPort(
+	'scrollTo2321',
 	function (v) {
 		return v;
 	});
-var _lucamug$elm_history_wrapper$Main$Model = F2(
-	function (a, b) {
-		return {position: a, error: b};
+var _lucamug$elm_history_wrapper$Main$Model = F3(
+	function (a, b, c) {
+		return {position: a, counter: b, error: c};
 	});
 var _lucamug$elm_history_wrapper$Main$Element = F2(
 	function (a, b) {
@@ -12836,6 +12869,30 @@ var _lucamug$elm_history_wrapper$Main$update = F2(
 	function (msg, model) {
 		var _p1 = msg;
 		switch (_p1.ctor) {
+			case 'Increment':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{counter: model.counter + 1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Decrement':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{counter: model.counter - 1}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'Reset':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{counter: 0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'OnScroll':
 				return {
 					ctor: '_Tuple2',
@@ -12854,12 +12911,8 @@ var _lucamug$elm_history_wrapper$Main$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$batch(
 						{
 							ctor: '::',
-							_0: _lucamug$elm_history_wrapper$Main$portScrollTo(_p1._0),
-							_1: {
-								ctor: '::',
-								_0: A2(_elm_lang$core$Task$perform, _lucamug$elm_history_wrapper$Main$OnTime, _elm_lang$core$Time$now),
-								_1: {ctor: '[]'}
-							}
+							_0: A2(_elm_lang$core$Task$perform, _lucamug$elm_history_wrapper$Main$OnTime, _elm_lang$core$Time$now),
+							_1: {ctor: '[]'}
 						})
 				};
 			case 'OnTime':
@@ -12892,43 +12945,6 @@ var _lucamug$elm_history_wrapper$Main$setScrollTopResult = function (result) {
 var _lucamug$elm_history_wrapper$Main$ScrollTo = function (a) {
 	return {ctor: 'ScrollTo', _0: a};
 };
-var _lucamug$elm_history_wrapper$Main$infoHelp = function (msg) {
-	var _p4 = msg;
-	switch (_p4) {
-		case 'ScrollTo':
-			return _elm_lang$core$Json_Decode$succeed(
-				_lucamug$elm_history_wrapper$Main$None('Ignoring ScrollTo during the playback...'));
-		case 'ScrollTopResult':
-			return _elm_lang$core$Json_Decode$succeed(
-				_lucamug$elm_history_wrapper$Main$None('Ignoring ScrollTopResult during the playback...'));
-		case 'OnScroll':
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (position) {
-					return _elm_lang$core$Json_Decode$succeed(
-						_lucamug$elm_history_wrapper$Main$ScrollTo(position));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'position', _elm_lang$core$Json_Decode$float));
-		case 'OnTime':
-			return _elm_lang$core$Json_Decode$succeed(
-				_lucamug$elm_history_wrapper$Main$None('Ignoring OnTime...'));
-		case 'None':
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (text) {
-					return _elm_lang$core$Json_Decode$succeed(
-						_lucamug$elm_history_wrapper$Main$None(text));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-		default:
-			return _elm_lang$core$Json_Decode$fail(
-				A2(_elm_lang$core$Basics_ops['++'], 'Unknown msg type: ', msg));
-	}
-};
-var _lucamug$elm_history_wrapper$Main$decodeMsg = A2(
-	_elm_lang$core$Json_Decode$andThen,
-	_lucamug$elm_history_wrapper$Main$infoHelp,
-	A2(_elm_lang$core$Json_Decode$field, 'msg', _elm_lang$core$Json_Decode$string));
 var _lucamug$elm_history_wrapper$Main$OnScroll = function (a) {
 	return {ctor: 'OnScroll', _0: a};
 };
@@ -13021,6 +13037,9 @@ var _lucamug$elm_history_wrapper$Main$content = function (color) {
 			_1: {ctor: '[]'}
 		});
 };
+var _lucamug$elm_history_wrapper$Main$Reset = {ctor: 'Reset'};
+var _lucamug$elm_history_wrapper$Main$Decrement = {ctor: 'Decrement'};
+var _lucamug$elm_history_wrapper$Main$Increment = {ctor: 'Increment'};
 var _lucamug$elm_history_wrapper$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -13043,17 +13062,102 @@ var _lucamug$elm_history_wrapper$Main$view = function (model) {
 							_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
 							_1: {
 								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_lucamug$elm_history_wrapper$Main$ScrollTo(0)),
+								_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Decrement),
 								_1: {ctor: '[]'}
 							}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Go to 0'),
+							_0: _elm_lang$html$Html$text(' - '),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$style(
+									{
+										ctor: '::',
+										_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
+										_1: {
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'padding', _1: '0 10px'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px'},
+												_1: {
+													ctor: '::',
+													_0: {ctor: '_Tuple2', _0: 'font-size', _1: '2em'},
+													_1: {
+														ctor: '::',
+														_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #eee'},
+														_1: {ctor: '[]'}
+													}
+												}
+											}
+										}
+									}),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(
+									_elm_lang$core$Basics$toString(model.counter)),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Increment),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text(' + '),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Reset),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('reset'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _lucamug$elm_history_wrapper$Main$sectionStyle,
+						_1: {ctor: '[]'}
+					},
+					{
 						ctor: '::',
 						_0: A2(
 							_elm_lang$html$Html$button,
@@ -13063,13 +13167,13 @@ var _lucamug$elm_history_wrapper$Main$view = function (model) {
 								_1: {
 									ctor: '::',
 									_0: _elm_lang$html$Html_Events$onClick(
-										_lucamug$elm_history_wrapper$Main$ScrollTo(50)),
+										_lucamug$elm_history_wrapper$Main$ScrollTo(0)),
 									_1: {ctor: '[]'}
 								}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Go to 50'),
+								_0: _elm_lang$html$Html$text('Go to 0'),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -13082,46 +13186,109 @@ var _lucamug$elm_history_wrapper$Main$view = function (model) {
 									_1: {
 										ctor: '::',
 										_0: _elm_lang$html$Html_Events$onClick(
-											_lucamug$elm_history_wrapper$Main$ScrollTo(100)),
+											_lucamug$elm_history_wrapper$Main$ScrollTo(50)),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Go to 100'),
+									_0: _elm_lang$html$Html$text('Go to 50'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
 								ctor: '::',
-								_0: _lucamug$elm_history_wrapper$Main$content('#ccccff'),
-								_1: {ctor: '[]'}
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(
+												_lucamug$elm_history_wrapper$Main$ScrollTo(100)),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Go to 100'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: _lucamug$elm_history_wrapper$Main$content('#ccccff'),
+									_1: {ctor: '[]'}
+								}
 							}
 						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(model.error),
-						_1: {ctor: '[]'}
 					}),
-				_1: {ctor: '[]'}
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(model.error),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
+var _lucamug$elm_history_wrapper$Main$infoHelp = function (msg) {
+	var _p4 = msg;
+	switch (_p4) {
+		case 'Increment':
+			return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$Increment);
+		case 'Decrement':
+			return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$Decrement);
+		case 'Reset':
+			return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$Reset);
+		case 'ScrollTo':
+			return _elm_lang$core$Json_Decode$succeed(
+				_lucamug$elm_history_wrapper$Main$None('Ignoring ScrollTo during the playback...'));
+		case 'ScrollTopResult':
+			return _elm_lang$core$Json_Decode$succeed(
+				_lucamug$elm_history_wrapper$Main$None('Ignoring ScrollTopResult during the playback...'));
+		case 'OnScroll':
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (position) {
+					return _elm_lang$core$Json_Decode$succeed(
+						_lucamug$elm_history_wrapper$Main$ScrollTo(position));
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'position', _elm_lang$core$Json_Decode$float));
+		case 'OnTime':
+			return _elm_lang$core$Json_Decode$succeed(
+				_lucamug$elm_history_wrapper$Main$None('Ignoring OnTime...'));
+		case 'None':
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (text) {
+					return _elm_lang$core$Json_Decode$succeed(
+						_lucamug$elm_history_wrapper$Main$None(text));
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
+		default:
+			return _elm_lang$core$Json_Decode$fail(
+				A2(_elm_lang$core$Basics_ops['++'], 'Unknown msg type: ', msg));
+	}
+};
+var _lucamug$elm_history_wrapper$Main$decodeMsg = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	_lucamug$elm_history_wrapper$Main$infoHelp,
+	A2(_elm_lang$core$Json_Decode$field, 'msg', _elm_lang$core$Json_Decode$string));
 var _lucamug$elm_history_wrapper$Main$Replay = {ctor: 'Replay'};
 var _lucamug$elm_history_wrapper$Main$CopyHistory = {ctor: 'CopyHistory'};
 var _lucamug$elm_history_wrapper$Main$Update = function (a) {
@@ -13428,7 +13595,7 @@ var _lucamug$elm_history_wrapper$Main$main = A2(
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _lucamug$elm_history_wrapper$Main$main !== 'undefined') {
-    _lucamug$elm_history_wrapper$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"OnScroll":["Float"],"None":["String"],"ScrollTo":["Float"],"OnTime":["Time.Time"],"ScrollTopResult":["String"]}},"Main.WrappedMsg":{"args":["msg"],"tags":{"Wrapped":["msg"],"Replay":[],"CopyHistory":[],"Update":["String"]}}},"aliases":{"Time.Time":{"args":[],"type":"Float"}},"message":"Main.WrappedMsg Main.Msg"},"versions":{"elm":"0.18.0"}});
+    _lucamug$elm_history_wrapper$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"OnScroll":["Float"],"Decrement":[],"None":["String"],"ScrollTo":["Float"],"OnTime":["Time.Time"],"ScrollTopResult":["String"],"Reset":[],"Increment":[]}},"Main.WrappedMsg":{"args":["msg"],"tags":{"Wrapped":["msg"],"Replay":[],"CopyHistory":[],"Update":["String"]}}},"aliases":{"Time.Time":{"args":[],"type":"Float"}},"message":"Main.WrappedMsg Main.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])

@@ -15,4 +15,8 @@ The code come from an Ellie example (https://ellie-app.com/4DDZ2QrT3a1/0) that I
 ## Development
 
 * elm-live src/Step00.elm --output=compiled/Step00.js --open --debug
-* elm-live src/Main.elm --output=compiled/Main.js --open --debug
+* elm-live src/Step01.elm --output=compiled/Step01.js --open --debug
+* elm-live src/Step02.elm --output=compiled/Step02.js --open --debug
+* elm-live src/Step03.elm --output=compiled/Step03.js --open --debug
+* elm-live src/Step04.elm --output=compiled/Step04.js --open --debug
+* elm-live src/Index.elm --output=compiled/Index.js --open --debug

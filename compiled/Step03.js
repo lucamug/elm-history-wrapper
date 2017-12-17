@@ -12631,396 +12631,84 @@ var _elm_lang$html$Html_Events$Options = F2(
 		return {stopPropagation: a, preventDefault: b};
 	});
 
-var _lucamug$elm_history_wrapper$Main$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$batch(
-		{ctor: '[]'});
-};
 var _lucamug$elm_history_wrapper$Main$encodeMsg = function (msg) {
 	var _p0 = msg;
 	switch (_p0.ctor) {
-		case 'OnScroll':
-			return _elm_lang$core$Json_Encode$object(
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'msg',
-						_1: _elm_lang$core$Json_Encode$string('OnScroll')
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'position',
-							_1: _elm_lang$core$Json_Encode$float(_p0._0)
-						},
-						_1: {ctor: '[]'}
-					}
-				});
-		case 'ScrollTo':
-			return _elm_lang$core$Json_Encode$object(
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'msg',
-						_1: _elm_lang$core$Json_Encode$string('ScrollTo')
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'position',
-							_1: _elm_lang$core$Json_Encode$float(_p0._0)
-						},
-						_1: {ctor: '[]'}
-					}
-				});
-		case 'ScrollTopResult':
-			return _elm_lang$core$Json_Encode$object(
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'msg',
-						_1: _elm_lang$core$Json_Encode$string('ScrollTopResult')
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'result',
-							_1: _elm_lang$core$Json_Encode$string(_p0._0)
-						},
-						_1: {ctor: '[]'}
-					}
-				});
+		case 'Increment':
+			return _elm_lang$core$Json_Encode$string('increment');
+		case 'Decrement':
+			return _elm_lang$core$Json_Encode$string('decrement');
+		case 'Reset':
+			return _elm_lang$core$Json_Encode$string('reset');
 		case 'OnTime':
-			return _elm_lang$core$Json_Encode$object(
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'msg',
-						_1: _elm_lang$core$Json_Encode$string('OnTime')
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'position',
-							_1: _elm_lang$core$Json_Encode$float(_p0._0)
-						},
-						_1: {ctor: '[]'}
-					}
-				});
+			return _elm_lang$core$Json_Encode$string('onTime');
 		default:
-			return _elm_lang$core$Json_Encode$object(
-				{
-					ctor: '::',
-					_0: {
-						ctor: '_Tuple2',
-						_0: 'msg',
-						_1: _elm_lang$core$Json_Encode$string('None')
-					},
-					_1: {
-						ctor: '::',
-						_0: {
-							ctor: '_Tuple2',
-							_0: 'text',
-							_1: _elm_lang$core$Json_Encode$string(_p0._0)
-						},
-						_1: {ctor: '[]'}
-					}
-				});
+			return _elm_lang$core$Json_Encode$string('none');
 	}
 };
-var _lucamug$elm_history_wrapper$Main$encodeMessages = function (messages) {
-	return A2(
-		_elm_lang$core$Json_Encode$encode,
-		2,
-		_elm_lang$core$Json_Encode$list(
-			A2(
-				_elm_lang$core$List$map,
-				_lucamug$elm_history_wrapper$Main$encodeMsg,
-				_elm_lang$core$List$reverse(messages))));
-};
-var _lucamug$elm_history_wrapper$Main$decodeOnScrollEvent = A2(
-	_elm_lang$core$Json_Decode$at,
-	{
-		ctor: '::',
-		_0: 'target',
-		_1: {
-			ctor: '::',
-			_0: 'scrollTop',
-			_1: {ctor: '[]'}
-		}
-	},
-	_elm_lang$core$Json_Decode$float);
-var _lucamug$elm_history_wrapper$Main$buttonStyle = _elm_lang$html$Html_Attributes$style(
-	{
-		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'background-color', _1: '#fee'},
-		_1: {
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'border-radius', _1: '20px'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'border', _1: '2px solid #fdd'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'padding', _1: '10px'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'margin', _1: '5px'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1.1em'},
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		}
-	});
-var _lucamug$elm_history_wrapper$Main$sectionStyle = _elm_lang$html$Html_Attributes$style(
-	{
-		ctor: '::',
-		_0: {ctor: '_Tuple2', _0: 'border', _1: '1px solid #eee'},
-		_1: {
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'padding', _1: '10px'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'margin', _1: '10px'},
-				_1: {ctor: '[]'}
-			}
-		}
-	});
-var _lucamug$elm_history_wrapper$Main$containerId = 'div5964';
-var _lucamug$elm_history_wrapper$Main$init = {
-	ctor: '_Tuple2',
-	_0: {position: 0, error: ''},
-	_1: _elm_lang$core$Platform_Cmd$none
-};
-var _lucamug$elm_history_wrapper$Main$portScrollTo = _elm_lang$core$Native_Platform.outgoingPort(
-	'portScrollTo',
-	function (v) {
-		return v;
-	});
+var _lucamug$elm_history_wrapper$Main$init = A2(
+	_elm_lang$core$Platform_Cmd_ops['!'],
+	{counter: 0, error: ''},
+	{ctor: '[]'});
 var _lucamug$elm_history_wrapper$Main$Model = F2(
 	function (a, b) {
-		return {position: a, error: b};
+		return {counter: a, error: b};
 	});
-var _lucamug$elm_history_wrapper$Main$Element = F2(
-	function (a, b) {
-		return {key: a, value: b};
-	});
-var _lucamug$elm_history_wrapper$Main$elementDecoder = A3(
-	_elm_lang$core$Json_Decode$map2,
-	_lucamug$elm_history_wrapper$Main$Element,
-	A2(_elm_lang$core$Json_Decode$field, 'key', _elm_lang$core$Json_Decode$string),
-	A2(_elm_lang$core$Json_Decode$field, 'value', _elm_lang$core$Json_Decode$int));
 var _lucamug$elm_history_wrapper$Main$Codec = F2(
 	function (a, b) {
 		return {encode: a, decode: b};
 	});
-var _lucamug$elm_history_wrapper$Main$WrappedModel = F6(
-	function (a, b, c, d, e, f) {
-		return {wrapped: a, initial: b, messages: c, codec: d, error: e, input: f};
+var _lucamug$elm_history_wrapper$Main$WrappedModel = F5(
+	function (a, b, c, d, e) {
+		return {wrapped: a, initial: b, messages: c, codec: d, input: e};
 	});
+var _lucamug$elm_history_wrapper$Main$None = {ctor: 'None'};
 var _lucamug$elm_history_wrapper$Main$OnTime = function (a) {
 	return {ctor: 'OnTime', _0: a};
 };
 var _lucamug$elm_history_wrapper$Main$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
+		var _p1 = A2(_elm_lang$core$Debug$log, 'msg', msg);
 		switch (_p1.ctor) {
-			case 'OnScroll':
+			case 'Increment':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{position: _p1._0, error: ''}),
-					_1: _elm_lang$core$Platform_Cmd$none
+						{counter: model.counter + 1, error: 'OnTime not called yet'}),
+					_1: A2(_elm_lang$core$Task$perform, _lucamug$elm_history_wrapper$Main$OnTime, _elm_lang$core$Time$now)
 				};
-			case 'ScrollTo':
-				var _p2 = A2(_elm_lang$core$Debug$log, 'Here it should call OnTime...', '');
+			case 'Decrement':
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{error: 'Here it should call Time.now'}),
-					_1: _elm_lang$core$Platform_Cmd$batch(
-						{
-							ctor: '::',
-							_0: _lucamug$elm_history_wrapper$Main$portScrollTo(_p1._0),
-							_1: {
-								ctor: '::',
-								_0: A2(_elm_lang$core$Task$perform, _lucamug$elm_history_wrapper$Main$OnTime, _elm_lang$core$Time$now),
-								_1: {ctor: '[]'}
-							}
-						})
+						{counter: model.counter - 1, error: 'OnTime not called yet'}),
+					_1: A2(_elm_lang$core$Task$perform, _lucamug$elm_history_wrapper$Main$OnTime, _elm_lang$core$Time$now)
+				};
+			case 'Reset':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{counter: 0, error: 'OnTime not called yet'}),
+					_1: A2(_elm_lang$core$Task$perform, _lucamug$elm_history_wrapper$Main$OnTime, _elm_lang$core$Time$now)
 				};
 			case 'OnTime':
-				var _p3 = _elm_lang$core$Debug$log('...OnTime called');
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{
-							error: A2(_elm_lang$core$Basics_ops['++'], model.error, '...OnTime called')
-						}),
+						{error: ''}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			case 'ScrollTopResult':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 			default:
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
-var _lucamug$elm_history_wrapper$Main$None = function (a) {
-	return {ctor: 'None', _0: a};
-};
-var _lucamug$elm_history_wrapper$Main$ScrollTopResult = function (a) {
-	return {ctor: 'ScrollTopResult', _0: a};
-};
-var _lucamug$elm_history_wrapper$Main$setScrollTopResult = function (result) {
-	return _lucamug$elm_history_wrapper$Main$ScrollTopResult(
-		_elm_lang$core$Basics$toString(result));
-};
-var _lucamug$elm_history_wrapper$Main$ScrollTo = function (a) {
-	return {ctor: 'ScrollTo', _0: a};
-};
-var _lucamug$elm_history_wrapper$Main$infoHelp = function (msg) {
-	var _p4 = msg;
-	switch (_p4) {
-		case 'ScrollTo':
-			return _elm_lang$core$Json_Decode$succeed(
-				_lucamug$elm_history_wrapper$Main$None('Ignoring ScrollTo during the playback...'));
-		case 'ScrollTopResult':
-			return _elm_lang$core$Json_Decode$succeed(
-				_lucamug$elm_history_wrapper$Main$None('Ignoring ScrollTopResult during the playback...'));
-		case 'OnScroll':
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (position) {
-					return _elm_lang$core$Json_Decode$succeed(
-						_lucamug$elm_history_wrapper$Main$ScrollTo(position));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'position', _elm_lang$core$Json_Decode$float));
-		case 'OnTime':
-			return _elm_lang$core$Json_Decode$succeed(
-				_lucamug$elm_history_wrapper$Main$None('Ignoring OnTime...'));
-		case 'None':
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (text) {
-					return _elm_lang$core$Json_Decode$succeed(
-						_lucamug$elm_history_wrapper$Main$None(text));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-		default:
-			return _elm_lang$core$Json_Decode$fail(
-				A2(_elm_lang$core$Basics_ops['++'], 'Unknown msg type: ', msg));
-	}
-};
-var _lucamug$elm_history_wrapper$Main$decodeMsg = A2(
-	_elm_lang$core$Json_Decode$andThen,
-	_lucamug$elm_history_wrapper$Main$infoHelp,
-	A2(_elm_lang$core$Json_Decode$field, 'msg', _elm_lang$core$Json_Decode$string));
-var _lucamug$elm_history_wrapper$Main$OnScroll = function (a) {
-	return {ctor: 'OnScroll', _0: a};
-};
-var _lucamug$elm_history_wrapper$Main$content = function (color) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id(_lucamug$elm_history_wrapper$Main$containerId),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html_Events$on,
-					'scroll',
-					A2(_elm_lang$core$Json_Decode$map, _lucamug$elm_history_wrapper$Main$OnScroll, _lucamug$elm_history_wrapper$Main$decodeOnScrollEvent)),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'margin-top', _1: '10px'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'height', _1: '100px'},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'overflow-y', _1: 'scroll'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'background-color', _1: color},
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$style(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'margin', _1: '2em'},
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						A2(
-							_elm_lang$core$List$repeat,
-							15,
-							A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$h2,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Paragraph'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$p,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('\n    Nel mezzo del cammin di nostra vita\n    mi ritrovai per una selva oscura,\n    ché la diritta via era smarrita.\n    Ahi quanto a dir qual era è cosa dura\n    esta selva selvaggia e aspra e forte\n    che nel pensier rinova la paura!\n    Tant\' è amara che poco è più morte;\n    ma per trattar del ben ch\'i\' vi trovai,\n    dirò de l\'altre cose ch\'i\' v\'ho scorte.\n    Io non so ben ridir com\' i\' v\'intrai,\n    tant\' era pien di sonno a quel punto\n    che la verace via abbandonai.\n    Ma poi ch\'i\' fui al piè d\'un colle giunto,\n    là dove terminava quella valle\n    che m\'avea di paura il cor compunto,\n    guardai in alto e vidi le sue spalle\n    vestite già de\' raggi del pianeta\n    che mena dritto altrui per ogne calle.\n    Allor fu la paura un poco queta,\n    che nel lago del cor m\'era durata\n    la notte ch\'i\' passai con tanta pieta.'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}))),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		});
-};
+var _lucamug$elm_history_wrapper$Main$Reset = {ctor: 'Reset'};
+var _lucamug$elm_history_wrapper$Main$Decrement = {ctor: 'Decrement'};
+var _lucamug$elm_history_wrapper$Main$Increment = {ctor: 'Increment'};
 var _lucamug$elm_history_wrapper$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -13028,29 +12716,33 @@ var _lucamug$elm_history_wrapper$Main$view = function (model) {
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$div,
+				_elm_lang$html$Html$button,
 				{
 					ctor: '::',
-					_0: _lucamug$elm_history_wrapper$Main$sectionStyle,
+					_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Decrement),
 					_1: {ctor: '[]'}
 				},
 				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('-'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(
+					_elm_lang$core$Basics$toString(model.counter)),
+				_1: {
 					ctor: '::',
 					_0: A2(
 						_elm_lang$html$Html$button,
 						{
 							ctor: '::',
-							_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(
-									_lucamug$elm_history_wrapper$Main$ScrollTo(0)),
-								_1: {ctor: '[]'}
-							}
+							_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Increment),
+							_1: {ctor: '[]'}
 						},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Go to 0'),
+							_0: _elm_lang$html$Html$text('+'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {
@@ -13059,71 +12751,61 @@ var _lucamug$elm_history_wrapper$Main$view = function (model) {
 							_elm_lang$html$Html$button,
 							{
 								ctor: '::',
-								_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(
-										_lucamug$elm_history_wrapper$Main$ScrollTo(50)),
-									_1: {ctor: '[]'}
-								}
+								_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Reset),
+								_1: {ctor: '[]'}
 							},
 							{
 								ctor: '::',
-								_0: _elm_lang$html$Html$text('Go to 50'),
+								_0: _elm_lang$html$Html$text('reset'),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$button,
+								_elm_lang$html$Html$div,
 								{
 									ctor: '::',
-									_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_lucamug$elm_history_wrapper$Main$ScrollTo(100)),
-										_1: {ctor: '[]'}
-									}
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Go to 100'),
+									_0: _elm_lang$html$Html$text(model.error),
 									_1: {ctor: '[]'}
 								}),
-							_1: {
-								ctor: '::',
-								_0: _lucamug$elm_history_wrapper$Main$content('#ccccff'),
-								_1: {ctor: '[]'}
-							}
+							_1: {ctor: '[]'}
 						}
 					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(model.error),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
+				}
 			}
 		});
 };
+var _lucamug$elm_history_wrapper$Main$decodeMsg = A2(
+	_elm_lang$core$Json_Decode$andThen,
+	function (msgString) {
+		var _p2 = msgString;
+		switch (_p2) {
+			case 'increment':
+				return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$Increment);
+			case 'decrement':
+				return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$Decrement);
+			case 'reset':
+				return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$Reset);
+			case 'onTime':
+				return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$None);
+			case 'none':
+				return _elm_lang$core$Json_Decode$succeed(_lucamug$elm_history_wrapper$Main$None);
+			default:
+				return _elm_lang$core$Json_Decode$fail('unknown msg type');
+		}
+	},
+	_elm_lang$core$Json_Decode$string);
 var _lucamug$elm_history_wrapper$Main$Replay = {ctor: 'Replay'};
-var _lucamug$elm_history_wrapper$Main$CopyHistory = {ctor: 'CopyHistory'};
 var _lucamug$elm_history_wrapper$Main$Update = function (a) {
 	return {ctor: 'Update', _0: a};
 };
@@ -13131,48 +12813,37 @@ var _lucamug$elm_history_wrapper$Main$Wrapped = function (a) {
 	return {ctor: 'Wrapped', _0: a};
 };
 var _lucamug$elm_history_wrapper$Main$wrapperInit = F2(
-	function (codec, _p5) {
-		var _p6 = _p5;
-		var _p7 = _p6._0;
+	function (codec, _p3) {
+		var _p4 = _p3;
+		var _p5 = _p4._0;
 		return {
 			ctor: '_Tuple2',
 			_0: {
-				wrapped: _p7,
-				initial: _p7,
+				wrapped: _p5,
+				initial: _p5,
 				messages: {ctor: '[]'},
 				codec: codec,
-				input: '[\n  {\n    \"msg\": \"OnScroll\",\n    \"position\": 50\n  }\n]',
-				error: ''
+				input: '[\n  \"increment\"\n]'
 			},
-			_1: A2(_elm_lang$core$Platform_Cmd$map, _lucamug$elm_history_wrapper$Main$Wrapped, _p6._1)
+			_1: A2(_elm_lang$core$Platform_Cmd$map, _lucamug$elm_history_wrapper$Main$Wrapped, _p4._1)
 		};
 	});
 var _lucamug$elm_history_wrapper$Main$wrapperUpdate = F3(
 	function (wrappedUpdate, msg, model) {
-		var _p8 = msg;
-		switch (_p8.ctor) {
-			case 'CopyHistory':
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{
-							input: _lucamug$elm_history_wrapper$Main$encodeMessages(model.messages)
-						}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+		var _p6 = msg;
+		switch (_p6.ctor) {
 			case 'Wrapped':
-				var _p10 = _p8._0;
-				var _p9 = A2(wrappedUpdate, _p10, model.wrapped);
-				var wrapped = _p9._0;
-				var msgs = _p9._1;
+				var _p8 = _p6._0;
+				var _p7 = A2(wrappedUpdate, _p8, model.wrapped);
+				var wrapped = _p7._0;
+				var msgs = _p7._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
 						{
 							wrapped: wrapped,
-							messages: {ctor: '::', _0: _p10, _1: model.messages}
+							messages: {ctor: '::', _0: _p8, _1: model.messages}
 						}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _lucamug$elm_history_wrapper$Main$Wrapped, msgs)
 				};
@@ -13181,22 +12852,21 @@ var _lucamug$elm_history_wrapper$Main$wrapperUpdate = F3(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{input: _p8._0}),
+						{input: _p6._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
-				var _p11 = A2(
+				var _p9 = A2(
 					_elm_lang$core$Json_Decode$decodeString,
 					_elm_lang$core$Json_Decode$list(model.codec.decode),
 					model.input);
-				if (_p11.ctor === 'Ok') {
-					var _p12 = _p11._0;
+				if (_p9.ctor === 'Ok') {
+					var _p10 = _p9._0;
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								error: '',
 								wrapped: A3(
 									_elm_lang$core$List$foldl,
 									F2(
@@ -13205,8 +12875,8 @@ var _lucamug$elm_history_wrapper$Main$wrapperUpdate = F3(
 												A2(wrappedUpdate, msg, model));
 										}),
 									model.initial,
-									_p12),
-								messages: _elm_lang$core$List$reverse(_p12)
+									_p10),
+								messages: _elm_lang$core$List$reverse(_p10)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
@@ -13216,7 +12886,7 @@ var _lucamug$elm_history_wrapper$Main$wrapperUpdate = F3(
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								error: _elm_lang$core$Basics$toString(_p11._0)
+								input: _elm_lang$core$Basics$toString(_p9._0)
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
@@ -13225,6 +12895,14 @@ var _lucamug$elm_history_wrapper$Main$wrapperUpdate = F3(
 	});
 var _lucamug$elm_history_wrapper$Main$wrapperView = F3(
 	function (wrappedView, codec, model) {
+		var messages = A2(
+			_elm_lang$core$Json_Encode$encode,
+			2,
+			_elm_lang$core$Json_Encode$list(
+				A2(
+					_elm_lang$core$List$map,
+					codec.encode,
+					_elm_lang$core$List$reverse(model.messages))));
 		return A2(
 			_elm_lang$html$Html$div,
 			{ctor: '[]'},
@@ -13237,168 +12915,71 @@ var _lucamug$elm_history_wrapper$Main$wrapperView = F3(
 				_1: {
 					ctor: '::',
 					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'pink'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'padding', _1: '20px'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
+						_elm_lang$html$Html$hr,
+						{ctor: '[]'},
+						{ctor: '[]'}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$pre,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html$text(messages),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
 							ctor: '::',
 							_0: A2(
-								_elm_lang$html$Html$h1,
-								{ctor: '[]'},
+								_elm_lang$html$Html$textarea,
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('History Wrapper'),
-									_1: {ctor: '[]'}
-								}),
+									_0: _elm_lang$html$Html_Attributes$style(
+										{
+											ctor: '::',
+											_0: {ctor: '_Tuple2', _0: 'width', _1: '400px'},
+											_1: {
+												ctor: '::',
+												_0: {ctor: '_Tuple2', _0: 'height', _1: '200px'},
+												_1: {ctor: '[]'}
+											}
+										}),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$value(model.input),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onInput(_lucamug$elm_history_wrapper$Main$Update),
+											_1: {ctor: '[]'}
+										}
+									}
+								},
+								{ctor: '[]'}),
 							_1: {
 								ctor: '::',
 								_0: A2(
-									_elm_lang$html$Html$div,
+									_elm_lang$html$Html$br,
 									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$h2,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('History'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$textarea,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$value(
-														_lucamug$elm_history_wrapper$Main$encodeMessages(model.messages)),
-													_1: {ctor: '[]'}
-												},
-												{ctor: '[]'}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$button,
-													{
-														ctor: '::',
-														_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$CopyHistory),
-															_1: {ctor: '[]'}
-														}
-													},
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html$text('Copy History into Playback'),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}),
+									{ctor: '[]'}),
 								_1: {
 									ctor: '::',
 									_0: A2(
-										_elm_lang$html$Html$div,
-										{ctor: '[]'},
+										_elm_lang$html$Html$button,
 										{
 											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$h2,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Playback'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$textarea,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$style(
-															{
-																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'width', _1: '50%'},
-																_1: {
-																	ctor: '::',
-																	_0: {ctor: '_Tuple2', _0: 'height', _1: '100px'},
-																	_1: {ctor: '[]'}
-																}
-															}),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$value(model.input),
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onInput(_lucamug$elm_history_wrapper$Main$Update),
-																_1: {ctor: '[]'}
-															}
-														}
-													},
-													{ctor: '[]'}),
-												_1: {
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$button,
-														{
-															ctor: '::',
-															_0: _lucamug$elm_history_wrapper$Main$buttonStyle,
-															_1: {
-																ctor: '::',
-																_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Replay),
-																_1: {ctor: '[]'}
-															}
-														},
-														{
-															ctor: '::',
-															_0: _elm_lang$html$Html$text('Replay'),
-															_1: {ctor: '[]'}
-														}),
-													_1: {
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$div,
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html_Attributes$style(
-																	{
-																		ctor: '::',
-																		_0: {ctor: '_Tuple2', _0: 'color', _1: 'red'},
-																		_1: {ctor: '[]'}
-																	}),
-																_1: {ctor: '[]'}
-															},
-															{
-																ctor: '::',
-																_0: _elm_lang$html$Html$text(model.error),
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												}
-											}
+											_0: _elm_lang$html$Html_Events$onClick(_lucamug$elm_history_wrapper$Main$Replay),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('replay'),
+											_1: {ctor: '[]'}
 										}),
 									_1: {ctor: '[]'}
 								}
 							}
-						}),
-					_1: {ctor: '[]'}
+						}
+					}
 				}
 			});
 	});
@@ -13409,26 +12990,31 @@ var _lucamug$elm_history_wrapper$Main$qaProgram = F2(
 				init: A2(_lucamug$elm_history_wrapper$Main$wrapperInit, codec, config.init),
 				update: _lucamug$elm_history_wrapper$Main$wrapperUpdate(config.update),
 				view: A2(_lucamug$elm_history_wrapper$Main$wrapperView, config.view, codec),
-				subscriptions: function (_p13) {
+				subscriptions: function (_p11) {
 					return A2(
 						_elm_lang$core$Platform_Sub$map,
 						_lucamug$elm_history_wrapper$Main$Wrapped,
 						config.subscriptions(
 							function (_) {
 								return _.wrapped;
-							}(_p13)));
+							}(_p11)));
 				}
 			});
 	});
 var _lucamug$elm_history_wrapper$Main$main = A2(
 	_lucamug$elm_history_wrapper$Main$qaProgram,
 	{encode: _lucamug$elm_history_wrapper$Main$encodeMsg, decode: _lucamug$elm_history_wrapper$Main$decodeMsg},
-	{init: _lucamug$elm_history_wrapper$Main$init, update: _lucamug$elm_history_wrapper$Main$update, view: _lucamug$elm_history_wrapper$Main$view, subscriptions: _lucamug$elm_history_wrapper$Main$subscriptions})();
+	{
+		init: _lucamug$elm_history_wrapper$Main$init,
+		update: _lucamug$elm_history_wrapper$Main$update,
+		view: _lucamug$elm_history_wrapper$Main$view,
+		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
+	})();
 
 var Elm = {};
 Elm['Main'] = Elm['Main'] || {};
 if (typeof _lucamug$elm_history_wrapper$Main$main !== 'undefined') {
-    _lucamug$elm_history_wrapper$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"OnScroll":["Float"],"None":["String"],"ScrollTo":["Float"],"OnTime":["Time.Time"],"ScrollTopResult":["String"]}},"Main.WrappedMsg":{"args":["msg"],"tags":{"Wrapped":["msg"],"Replay":[],"CopyHistory":[],"Update":["String"]}}},"aliases":{"Time.Time":{"args":[],"type":"Float"}},"message":"Main.WrappedMsg Main.Msg"},"versions":{"elm":"0.18.0"}});
+    _lucamug$elm_history_wrapper$Main$main(Elm['Main'], 'Main', {"types":{"unions":{"Main.Msg":{"args":[],"tags":{"Decrement":[],"None":[],"OnTime":["Time.Time"],"Reset":[],"Increment":[]}},"Main.WrappedMsg":{"args":["msg"],"tags":{"Wrapped":["msg"],"Replay":[],"Update":["String"]}}},"aliases":{"Time.Time":{"args":[],"type":"Float"}},"message":"Main.WrappedMsg Main.Msg"},"versions":{"elm":"0.18.0"}});
 }
 
 if (typeof define === "function" && define['amd'])
